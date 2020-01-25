@@ -1,17 +1,40 @@
 (use-package linum-relative
   :ensure t
   :config
-   ;; Use `display-line-number-mode` as linum-mode's backend for smooth performance
-  (setq linum-relative-backend 'display-line-numbers-mode))
+  ;; Use `display-line-number-mode` as linum-mode's backend for smooth performance
+
+     (setq linum-relative-backend 'display-line-numbers-mode))
+
 (use-package cc-mode
   :bind (:map c-mode-base-map
          ("C-c c" . compile))
   :hook (c-mode-common . (lambda ()
-			   (display-line-numbers-mode)
-			   (linum-relative-mode)
+			   ;; (display-line-numbers-mode)
+			   ;; (linum-relative-mode)
                             (c-set-style "bsd")
                             (setq tab-width 8)
                             (setq c-base-offset 8))))
+;;(add-hook 'c-mode-common-hook 'linum-relative-mode)
+
+;; (use-package google-c-style
+;;   :ensure t
+;;   :config
+;;   (add-hook 'c-mode-common-hook 'google-set-c-style)
+;;   (add-hook 'c-mode-common-hook 'google-make-newline-indent)
+;;   )
+
+;;; clang-format configuration
+(use-package clang-format
+  :ensure t
+  :config
+  (progn
+    (defun clang-format-on-save ()
+      (add-hook 'before-save-hook #'clang-format-buffer nil 'local))
+    (add-hook 'c++-mode-hook 'clang-format-on-save)
+    (add-hook 'c-mode-hook 'clang-format-on-save)
+    )
+  )
+
 (use-package ccls
   :ensure t
   :config
@@ -21,7 +44,7 @@
   :hook ((c-mode c++-mode objc-mode) .
          (lambda () (require 'ccls) (lsp))))
 
-(setq lldb-executable "usr/bin/lldb")
+ (setq lldb-executable "usr/bin/lldb")
 
 (use-package company-c-headers
   :ensure t
@@ -107,5 +130,4 @@
     (semantic-mode 1)
     )
   )
-
 (provide 'init-cc-mode)

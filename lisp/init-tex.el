@@ -7,6 +7,7 @@
   (setq-default TeX-master nil)
   (add-hook 'LaTeX-mode-hook
             (lambda ()
+	      ;; (add-to-list TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
               (rainbow-delimiters-mode)
               (company-mode)
               ;; (smartparens-mode)
@@ -16,6 +17,15 @@
               (setq TeX-PDF-mode t)
               (setq TeX-source-correlate-method 'synctex)
               (setq TeX-source-correlate-start-server t)))
+
+  ;; (add-hook 'LaTeX-mode-hook #'my-latex-mode-hook)
+
+  ;;    (defun my-latex-mode-hook ()
+  ;;      (add-to-list 'TeX-command-list
+  ;;                   '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t)))
+     
+;; (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t"TeX-run-TeX nil t))
+	      ;; (setq Tex-command-default "XeLaTeX")))
 
 ;; Update PDF buffers after successful LaTeX runs
 (add-hook 'TeX-after-TeX-LaTeX-command-finished-hook

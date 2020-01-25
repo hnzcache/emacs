@@ -56,22 +56,29 @@
 
   :config
   (progn
-    (setq company-lsp-enable-recompletion t
-	    company-lsp-async t
-	    company-lsp-cache-candidates 'auto
-	    company-lsp-match-candidate-predicate 'company-lsp-match-candidate-prefix)))
+    (setq    company-lsp-enable-recompletion t
+	     company-lsp-async t
+	     company-lsp-cache-candidates 'auto
+	     company-lsp-match-candidate-predicate 'company-lsp-match-candidate-prefix)))
 
 (use-package company-auctex
   :ensure t
   :mode (".tex\\'" . LaTeX-mode)
   :init
-  (add-hook 'LaTeX-mode-hook
+  (add-hook 'LanTeX-mode-hook
 	      (lambda ()
 		(add-to-list (make-local-variable 'company-backends)
 			     '(company-auctex-labels
 			       company-auctex-bibs
-			       company-auctex-macros
+		dsaas	       company-auctex-macros
 			       company-auctex-symbols
 			       company-auctex-environments)))))
+
+
+
+(use-package which-key
+  :ensure t
+  :init
+  (which-key-mode))
 
 (provide 'init-company)

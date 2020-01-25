@@ -53,7 +53,7 @@
               alan--misc-lsp-hydra-heads)))
 
   (add-hook 'lsp-mode-hook
-            (lambda () (local-set-key (kbd "C-c C-l") 'alan/lsp-hydra/body))))  
+            (lambda () (local-set-key (kbd "<f2>") 'alan/lsp-hydra/body))))  
 
 
 
