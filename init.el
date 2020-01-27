@@ -67,38 +67,58 @@
     )
 
 
+(require 'init-cc-mode)
+(require 'init-company)
+(require 'init-counsel)
+
+(require 'init-debug)
+(require 'init-dired)
+
+(require 'init-face)
+(require 'init-flycheck)
 
 (require 'init-general)
-(require 'init-face)
-(require 'init-cc-mode)
-(require 'init-ivy)
-(require 'init-swiper)
-(require 'init-counsel)
-(require 'init-projectile)
-(require 'init-dired)
-(require 'init-flycheck)
-(require 'init-spell)
-(require 'init-treemacs)
-(require 'init-jump)
-(require 'init-yasnippet)
-(require 'init-pdf)
-(require 'init-company)
-(require 'init-tex)
-(require 'init-hydra)
-(require 'init-helm)
-(require 'init-lsp)
-(require 'init-python)
-(require 'init-scheme)
-(require 'init-nasm)
 (require 'init-git)
+
+(require 'init-helm)
+(require 'init-hydra)
+
+(require 'init-inputway)
+(require 'init-irony)
+(require 'init-ivy)
+
+(require 'init-jump)
+
+(require 'init-lsp)
+
+(require 'init-nasm)
+
+(require 'init-org)
+
+(require 'init-pdf)
+(require 'init-projectile)
+(require 'init-python)
+
+(require 'init-scheme)
+(require 'init-spell)
+(require 'init-swiper)
+
+(require 'init-terminal)
+(require 'init-tex)
+(require 'init-treemacs)
+
+(require 'init-yasnippet)
+
+
+
+
+
 ;;(require 'init-leetcode)
 
 
 
 
 
-(use-package vterm
-  :ensure t)
 
 
 
@@ -122,6 +142,11 @@
   :ensure t
   :config
   (load-theme 'molokai t))
+;; (use-package zenburn-theme
+;;   :ensure t
+;;   :config
+;;   (load-theme 'zenburn t))
+
 (server-start)
 
 (custom-set-variables
@@ -133,7 +158,5 @@
  '(ccls-executable "/usr/bin/ccls")
  '(ccls-sem-highlight-method 'font-lock)
  '(package-selected-packages
-   '(geiser company-anaconda anaconda-mode molokai-theme dap-mode lsp-java lsp-treemacs yasnippet-snippets use-package treemacs-projectile treemacs-magit treemacs-icons-dired synosaurus stickyfunc-enhance rainbow-delimiters org-pdfview multiple-cursors lsp-ui irony-eldoc hungry-delete highlight-symbol highlight-parentheses highlight-numbers function-args flycheck-irony flycheck-color-mode-line expand-region dumb-jump dired-subtree dired-narrow dictionary counsel company-tabnine company-lsp company-irony-c-headers company-irony company-c-headers company-auctex beacon all-the-icons-ivy all-the-icons-dired))
+   '(color-theme geiser company-anaconda anaconda-mode molokai-theme dap-mode lsp-java lsp-treemacs yasnippet-snippets use-package treemacs-projectile treemacs-magit treemacs-icons-dired synosaurus stickyfunc-enhance rainbow-delimiters org-pdfview multiple-cursors lsp-ui irony-eldoc hungry-delete highlight-symbol highlight-parentheses highlight-numbers function-args flycheck-irony flycheck-color-mode-line expand-region dumb-jump dired-subtree dired-narrow dictionary counsel company-tabnine company-lsp company-irony-c-headers company-irony company-c-headers company-auctex beacon all-the-icons-ivy all-the-icons-dired))
  '(sp-escape-quotes-after-insert nil))
-
-(setq make-pointer-invisible t)

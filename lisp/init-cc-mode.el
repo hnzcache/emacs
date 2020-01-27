@@ -1,10 +1,3 @@
-(use-package linum-relative
-  :ensure t
-  :config
-  ;; Use `display-line-number-mode` as linum-mode's backend for smooth performance
-
-     (setq linum-relative-backend 'display-line-numbers-mode))
-
 (use-package cc-mode
   :bind (:map c-mode-base-map
          ("C-c c" . compile))
@@ -44,69 +37,8 @@
   :hook ((c-mode c++-mode objc-mode) .
          (lambda () (require 'ccls) (lsp))))
 
- (setq lldb-executable "usr/bin/lldb")
+;; (setq lldb-executable "usr/bin/lldb")
 
-(use-package company-c-headers
-  :ensure t
-  :config
-  (progn
-    (setq company-c-headers-path-system '(
-                                          "/usr/include/c++/9.2.0"
-                                          "/usr/include/x86_64-linux-gnu/c++/9.2.0"
-                                          "/usr/include/c++/9.2.0/backward"
-                                          "/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"
-                                          "/usr/local/include"
-                                          "/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"
-                                          "/usr/include"
-                                          ))
-    (add-to-list 'company-backends 'company-c-headers)
-    )
-  )
-(use-package irony
-  :ensure t
-  :config
-  (progn
-    (add-hook 'c++-mode-hook 'irony-mode)
-    (add-hook 'c-mode-hook 'irony-mode)
-    (add-hook 'objc-mode-hook 'irony-mode)
-    (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-    )
-  )
-
-
-(use-package irony-eldoc
-  :ensure t
-  :config
-  (add-hook 'irony-mode-hook #'irony-eldoc)
-  )
-
-(use-package company-irony
-  :ensure t
-  :after(company)
-  :config
-  (progn
-    (add-to-list 'company-backends 'company-irony)
-    )
-  )
-
-(use-package company-irony-c-headers
-  :ensure t
-  :after(company)
-  :config
-  (progn
-    (add-to-list
-     'company-backends '(company-irony-c-headers company-irony))
-    )
-  )
-
-(use-package flycheck-irony
-  :ensure t
-  :config
-  (eval-after-load 'flycheck
-    '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
-  )
-
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 (use-package function-args
   :ensure t
@@ -130,4 +62,24 @@
     (semantic-mode 1)
     )
   )
+
+
+
+ (require 'compile)
+ (add-hook 'c-mode-common-hook
+           (lambda ()
+	     (unless (file-exists-p "Makefile")
+	       (set (make-local-variable 'compile-command)
+                    ;; emulate make's .c.o implicit pattern rule, but with
+                    ;; different defaults for the CC, CPPFLAGS, and CFLAGS
+                    ;; variables:
+                    ;; $(CC) -c -o $@ $(CPPFLAGS) $(CFLAGS) $<
+		    (let ((file (file-name-nondirectory buffer-file-name)))
+                      (format "%s -o %s %s %s %s"
+                              (or (getenv "CC") "clang")
+                              (file-name-sans-extension file)
+                              (or (getenv "CPPFLAGS") "-DDEBUG=9")
+;;                              (or (getenv "CFLAGS") "-ansi -pedantic -Wall -g")
+			      (or (getenv "CFLAGS") "-std=c11 -pedantic -Wall -g")
+			      file))))))
 (provide 'init-cc-mode)

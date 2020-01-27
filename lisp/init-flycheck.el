@@ -20,4 +20,16 @@
 
 
 
+(use-package flycheck-irony
+  :ensure t
+  :config
+  (eval-after-load 'flycheck
+    '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+  )
+
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
+
+
+
 (provide 'init-flycheck)

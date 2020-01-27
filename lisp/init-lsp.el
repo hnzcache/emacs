@@ -61,17 +61,21 @@
   :config
   (add-hook 'java-mode-hook 'lsp))
 
-(use-package dap-mode
-  :ensure t
-  :after lsp-mode
-  :config
-  (dap-mode t)
-  (dap-ui-mode t))
+;; (use-package dap-mode
+;;   :ensure t
+;;   :after lsp-mode
+;;   :config
+;;   (dap-mode t)
+;;   (dap-ui-mode t)
+;;   (dap-tooltip-mode 1)
+;; ;; use tooltips for mouse hover
+;; ;; if it is not enabled `dap-mode' will use the minibuffer.
+;;   (tooltip-mode 1))
 
-(use-package dap-java
-  :after (lsp-java))
-(require 'dap-lldb)
-(require 'dap-python)
+;; (use-package dap-java
+;;   :after (lsp-java))
+;; (require 'dap-lldb)
+;; (require 'dap-python)
 
 
 
@@ -80,7 +84,7 @@
 (defvar lsp-language-id-configuration
   '(...
     (python-mode . "python")
-     (java-mode . "java")
+     ;; (java-mode . "java")
    ...))
 ;; if you are adding the support for your language server in separate repo use
 ;; (add-to-list 'lsp-language-id-configuration '(python-mode . "python"))
@@ -90,10 +94,10 @@
                   :major-modes '(python-mode)
                   :server-id 'pyls))
 
-(lsp-register-client
- (make-lsp-client :new-connection (lsp-stdio-connection "jdtls")
-                  :major-modes '(java-mode)
-                  :server-id 'jdtls))
+;; (lsp-register-client
+;;  (make-lsp-client :new-connection (lsp-stdio-connection "jdtls")
+;;                   :major-modes '(java-mode)
+;;                   :server-id 'jdtls))
 
 
 

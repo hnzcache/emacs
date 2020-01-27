@@ -1,5 +1,12 @@
 (use-package posframe :ensure t)
 
+
+(use-package hl-line
+  :ensure t
+  :init
+  (add-hook 'prog-mode-hook (lambda () (hl-line-mode t)))
+  (add-hook 'text-mode-hook (lambda () (hl-line-mode t))))
+
 (use-package all-the-icons 
 :ensure t
 :defer 0.5)

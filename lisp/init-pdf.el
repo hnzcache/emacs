@@ -7,7 +7,7 @@
   (setq mouse-wheel-follow-mouse t)
   (setq pdf-view-resize-factor 1.10))
 
-(use-package org-pdfview
-  :ensure t)
+;; (use-package org-pdfview
+;;   :ensure t)
 
 (provide 'init-pdf)

@@ -48,6 +48,7 @@
   (setq reftex-cite-prompt-optional-args t)); Prompt for empty optional arguments in cite
 
 (use-package cdlatex
+  :ensure t
   :diminish cdlatex-mode
   :commands (turn-on-cdlatex
 	       cdlatex-mode)
